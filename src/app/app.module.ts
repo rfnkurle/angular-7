@@ -1,14 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import{MatButtonModule} from '@angular/material/button';
 import { AppComponent } from './app.component';
+import { AssignmentsComponent } from './assignments/assignments.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AssignmentsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
