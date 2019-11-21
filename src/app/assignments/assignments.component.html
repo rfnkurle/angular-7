@@ -1,6 +1,57 @@
-<p>
+<!-- loops through assignment array -->
+<!-- <div *ngFor="let assignment of assignments" 
+  [ngStyle]= "{'color': assignment.submitted === false ? 'red' : 'green'}"
+> -->
+
+<!-- <div *ngFor="let assignment of assignments" 
+  [ngClass]="{'submitted': assignment.submitted === true, 
+  'unsubmitted': assignment.submitted === false}"
+> -->
   <!-- string interpolation is a binding from logic file into html file -->
-  {{title}}
+  
+  
+  
+  <form ngForm #assignmentsForm class="form">
+    
+    <mat-form-field>
+      <!-- names input assignment name -->
+      <input matInput #assignmentName [(ngModel)] = "name" name="name">
+    </mat-form-field>
+
+    <mat-form-field>
+<input matInput 
+[matDatepicker]="picker" 
+[(ngModel)]="dueDate"
+name="name" placeholder="when's your assignment due?"
+>
+<mat-datepicker-toggle matSuffix 
+[for] ="picker"></mat-datepicker-toggle>
+
+    </mat-form-field>
+    <button mat-stroked-button 
+    color="primary"
+    
+    [disabled] = '!enabled'
+    
+    (click)="onSubmit(); assignmentsForm.reset()"
+    >Add Assignment</button>
+  </form>
+  
+
+ <mat-list *ngFor="let assignment of assignments">
+   <!-- date pipe converts raw date into human readable date -->
+<h3 mat-subheader>{{assignment.dueDate | date}}</h3>
+<!-- *ngIf says if submitted, display <p>, else display <ng-template> -->
+  <mat-list-item (click)="setSelected(assignment)">
+  <p appSubmitted *ngIf="assignment.submitted; else unsubmitted"
+  >Assignment {{assignment.name}} has been submitted</p>
   <br>
-  {{title}}
-</p>
+  <ng-template #unsubmitted
+  
+  
+  >Assignment {{assignment.name}} has not been submitted</ng-template>
+  
+  <mat-divider></mat-divider>
+</mat-list-item>
+</mat-list>
+<app-assignment-detail [passedAssignment]="selectedAssignment"></app-assignment-detail>
