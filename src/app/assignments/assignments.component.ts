@@ -11,8 +11,7 @@ export class AssignmentsComponent implements OnInit {
   // property that will bind to component html throgh string interpolation
   title = "SON of A BITCH! (this is coming from a Child Component)"
   enabled = false;
-  name: string;
-  dueDate: Date;
+  formVisible = false;
 
   selectedAssignment: Assignment;
 
@@ -35,16 +34,14 @@ export class AssignmentsComponent implements OnInit {
     this.enabled = true;
   }, 2000)
 }
-onSubmit(){
-  const assignment = new Assignment();
-  assignment.name = this.name;
-  assignment.dueDate = this.dueDate;
-  assignment.submitted = false;
-  this.assignments.push(assignment)
-}
+
 
 setSelected(assignment: Assignment){
   this.selectedAssignment = assignment;
 }
 
+onAddBtnClick()
+{
+  this.formVisible = true;
+}
 }
