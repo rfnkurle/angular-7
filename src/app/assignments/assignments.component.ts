@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Assignment } from './assignment.model';
-
+import { AssignmentsService } from '../shared/assigments.service'
 //logic file
 @Component({
   selector: 'app-assignments',
@@ -15,24 +15,15 @@ export class AssignmentsComponent implements OnInit {
 
   selectedAssignment: Assignment;
 
-  assignments: Assignment[] = [{
-    name: "One",
-    dueDate: new Date('2019-01-01'),
-    submitted: true
-  },
-    {name: "Two",
-    dueDate: new Date('2019-01-01'),
-    submitted:false
-}
-]
+  assignments: Assignment[];
   
-  constructor() { }
+  constructor(
+    private assignmentsService: AssignmentsService
+  ) { }
 
   ngOnInit() {
+  this.assignments = this.assignmentsService.getAssignments();
   
-  setTimeout( () => {
-    this.enabled = true;
-  }, 2000)
 }
 
 
@@ -43,5 +34,11 @@ setSelected(assignment: Assignment){
 onAddBtnClick()
 {
   this.formVisible = true;
+  this.selectedAssignment = null;
+}
+
+onNewAssignment(event: Assignment){
+  this.assignments.push(event);
+  this.formVisible = false;
 }
 }

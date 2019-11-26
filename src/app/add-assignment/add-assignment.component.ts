@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Assignment } from '../assignments/assignment.model';
 
 @Component({
@@ -10,6 +10,10 @@ export class AddAssignmentComponent implements OnInit {
 
   name: string;
   dueDate: Date;
+  assignments: any;
+
+  //allows to emit events FROM a chld component, of type <Assignment>
+  @Output() newAssignment = new EventEmitter<Assignment>(); 
 
   constructor() { }
 
@@ -23,7 +27,7 @@ export class AddAssignmentComponent implements OnInit {
     assignment.dueDate = this.dueDate;
     assignment.submitted = false;
     
-    this.assignments.push(assignment)
+    this.newAssignment.emit(assignment);
   }
 
 }

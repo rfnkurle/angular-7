@@ -6,7 +6,7 @@ import { AssignmentsComponent } from './assignments/assignments.component';
 import { SubmittedDirective } from './shared/submitted.directive';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { AssigmentsService} from './shared/assigments.service';
+import { AssignmentsService} from './shared/assigments.service';
 import { AssignmentDetailComponent } from './assignment-detail/assignment-detail.component';
 import { AddAssignmentComponent } from './add-assignment/add-assignment.component'
 @NgModule({
@@ -31,7 +31,7 @@ import { AddAssignmentComponent } from './add-assignment/add-assignment.componen
     MatCheckboxModule
 
   ],
-  providers: [AssigmentsService],
+  providers: [AssignmentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
