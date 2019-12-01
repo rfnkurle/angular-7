@@ -22,10 +22,14 @@ export class AssignmentsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  this.assignments = this.assignmentsService.getAssignments();
+  this.getAssignments();
   
 }
 
+getAssignments(){
+  this.assignmentsService.getAssignments()
+  .subscribe( assignments => this.assignments = assignments);
+}
 
 setSelected(assignment: Assignment){
   this.selectedAssignment = assignment;
