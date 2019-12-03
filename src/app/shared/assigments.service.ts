@@ -46,4 +46,13 @@ export class AssignmentsService {
     return of('assignment updated!')
   }
 
+  deleteAssignment(deletedAssignment: Assignment): Observable<string> {
+    this.assignments.forEach((assignment, i) => {
+      if(assignment === deletedAssignment){
+        this.assignments.splice(i, 1); 
+      }
+    });
+    return of('assignment deleted!')
+  }
+
 }

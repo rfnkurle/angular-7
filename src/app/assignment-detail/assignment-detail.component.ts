@@ -23,4 +23,10 @@ export class AssignmentDetailComponent implements OnInit {
     .subscribe(result => console.log(result))
   }
 
+  onDelete(){
+    this.assignmentService.deleteAssignment(this.passedAssignment)
+    .subscribe(result => console.log(result));
+    this.passedAssignment = null;
+  }
+
 }
