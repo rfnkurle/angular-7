@@ -24,7 +24,26 @@ export class AssignmentsService {
    
   ) { }
 //sets the observable as an assignemnt
-  getAssignments(): Observable<Assignment[]> {
+  getAssignments(): Observable<Assignment []> {
+    //of package lets you return an observable
     return of(this.assignments)
   }
+
+  addAssignments(assignment: Assignment): Observable<string> {
+    this.assignments.push(assignment)
+    return of ('assignment added!');//observable returned as string
+  }
+
+  updateAssignments(assignment: Assignment): Observable<string>{
+    //loops through assignments array
+    this.assignments.forEach((assignment, i) => {
+      //if assignment passed in is equal to any assignments in array, replace it
+      if(assignment === assignment){
+        this.assignments[i] = assignment;
+      }
+    });
+
+    return of('assignment updated!')
+  }
+
 }

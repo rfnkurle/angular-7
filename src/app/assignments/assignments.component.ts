@@ -15,21 +15,26 @@ export class AssignmentsComponent implements OnInit {
 
   selectedAssignment: Assignment;
 
+  //local array to disply on screen
   assignments: Assignment[];
   
   constructor(
+    //injects an instance of the assignment service that we exported
     private assignmentsService: AssignmentsService
   ) { }
 
   ngOnInit() {
+  // this.assignments = this.assignmentsService.getAssignments();
   this.getAssignments();
-  
 }
 
 getAssignments(){
+  
+  //call our assignments service that was injected into constructor, 
+  //call getAssignments method and subscribe to populate assignments array locally
   this.assignmentsService.getAssignments()
   .subscribe( assignments => this.assignments = assignments);
-}
+}//1.takes assignments from service, 2.sets it to local array 3.makes it equal to assignment service
 
 setSelected(assignment: Assignment){
   this.selectedAssignment = assignment;
@@ -42,7 +47,10 @@ onAddBtnClick()
 }
 
 onNewAssignment(event: Assignment){
-  this.assignments.push(event);
+  this.assignmentsService.addAssignments(event)
+  .subscribe(success => console.log(success))
   this.formVisible = false;
 }
+
+
 }
