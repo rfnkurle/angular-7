@@ -1,38 +1,30 @@
-<!-- loops through assignment array -->
-<!-- <div *ngFor="let assignment of assignments" 
-  [ngStyle]= "{'color': assignment.submitted === false ? 'red' : 'green'}"
-> -->
+<main class="container" >
+  <div class="addBtn">
+    <a routerLink="/add">
+  <button mat-flat-button color="accent"
+          (click)="onAddBtnClick()">Add assignment
+  </button>
+    </a>
+  </div>
 
-<!-- <div *ngFor="let assignment of assignments" 
-  [ngClass]="{'submitted': assignment.submitted === true, 
-  'unsubmitted': assignment.submitted === false}"
-> -->
-  <!-- string interpolation is a binding from logic file into html file -->
-  
-  
-  
-  <main class="container" *ngIf="formVisible === false">
-  <button class="addButton" mat-flat-button color="accent"
-  (click)="onAddBtnClick()"
-  >Add-Assignment</button>
+  <mat-list *ngFor="let assignment of assignments">
+    <nav><a routerLink="/assignment/{{assignment.id}}">
+    <h3 mat-subheader>{{assignment.dueDate | date}}</h3>
+    <mat-list-item (click)="setSelected(assignment)">
+      <p matLine appSubmitted *ngIf="assignment.submitted; else unsubmitted">
+        You're {{assignment.name}} assignment has been submitted!</p>
 
- <mat-list *ngFor="let assignment of assignments">
-   <!-- date pipe converts raw date into human readable date -->
-<h3 mat-subheader>{{assignment.dueDate | date}}</h3>
-<!-- *ngIf says if submitted, display <p>, else display <ng-template> -->
-  <mat-list-item (click)="setSelected(assignment)">
-  <p appSubmitted *ngIf="assignment.submitted; else unsubmitted"
-  >Assignment {{assignment.name}} has been submitted</p>
-  <br>
-  <ng-template #unsubmitted
-  
-  
-  >Assignment {{assignment.name}} has not been submitted</ng-template>
-  
-  <mat-divider></mat-divider>
-</mat-list-item>
-</mat-list>
+      <ng-template matLine #unsubmitted>
+        You're {{assignment.name}} assignment hasn't been submitted!
+      </ng-template>
+
+      <mat-divider></mat-divider>
+    </mat-list-item>
+    </a></nav>
+  </mat-list>
 </main>
 
-<app-add-assignment (newAssignment)= "onNewAssignment($event)"></app-add-assignment>
-<app-assignment-detail [passedAssignment]="selectedAssignment"></app-assignment-detail>
+<!--<app-add-assignment (newAssignment)="onNewAssignment($event)"-->
+                    <!--*ngIf="formVisible"></app-add-assignment>-->
+
+<!--<app-assignment-detail [passedAssignment]="selectedAssignment"></app-assignment-detail>-->

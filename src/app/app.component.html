@@ -1,4 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 <!-- assignments selector renders whatever is happening in assignments component -->
-<app-assignments></app-assignments>
+<h1>
+   <nav><a routerLink="/home">{{appName}}</a></nav> 
+</h1>
+<!-- router outlet replaces this -> <app-assignments></app-assignments> -->
+<router-outlet></router-outlet>

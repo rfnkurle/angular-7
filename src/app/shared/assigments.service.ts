@@ -8,12 +8,16 @@ import { LoggingService } from './logging.service'
 })
 export class AssignmentsService {
 
-  assignments: Assignment[] = [{
+  assignments: Assignment[] = [
+    {
+    id: 1,
     name: "One",
     dueDate: new Date('2019-01-01'),
     submitted: true
   },
-    {name: "Two",
+    {
+      id: 2,
+      name: "Two",
     dueDate: new Date('2019-01-01'),
     submitted:false
 }
@@ -25,11 +29,16 @@ export class AssignmentsService {
    private loggingService: LoggingService
   ) { }
 //sets the observable as an assignemnt
-  getAssignments(): Observable<Assignment []> {
+  getAssignments(): Observable<Assignment[]> {
     //of package lets you return an observable
     return of(this.assignments)
   }
+  //uses id --- confusingly different from above
+  getAssignment(id: number): Observable<Assignment> {
+    return of(this.assignments.find(x => x.id === id));
+  }
 
+  
   addAssignments(assignment: Assignment): Observable<string> {
     this.assignments.push(assignment)
 

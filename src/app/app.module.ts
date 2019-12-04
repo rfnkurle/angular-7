@@ -9,13 +9,26 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AssignmentsService} from './shared/assigments.service';
 import { AssignmentDetailComponent } from './assignment-detail/assignment-detail.component';
 import { AddAssignmentComponent } from './add-assignment/add-assignment.component'
+import {  Routes, RouterModule } from '@angular/router';
+import { EditAssignmentComponent } from './assignment-detail/edit-assignment/edit-assignment.component'
+
+//routes as the variable declaration connected with Routes from @angular/router
+const routes: Routes = [
+  {path:'', component: AssignmentsComponent},
+  {path: 'home', component: AssignmentsComponent},
+  {path: 'add', component: AddAssignmentComponent},
+  {path: 'assignment/:id', component: AssignmentDetailComponent},
+  {path: 'assignment/:id/edit', component: EditAssignmentComponent}
+]
+
 @NgModule({
   declarations: [
     AppComponent,
     AssignmentsComponent,
     SubmittedDirective,
     AssignmentDetailComponent,
-    AddAssignmentComponent
+    AddAssignmentComponent,
+    EditAssignmentComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +41,9 @@ import { AddAssignmentComponent } from './add-assignment/add-assignment.componen
     MatNativeDateModule,
     MatListModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RouterModule.forRoot(routes),
+
 
   ],
   providers: [AssignmentsService],
