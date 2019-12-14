@@ -16,6 +16,7 @@ export class AuthService {
  }
 
  isAdmin(){
+   //promises either resolve or reject then close
    const isUserAdmin = new Promise(
     (resolve, reject) => {
       resolve(this.loggedIn);
