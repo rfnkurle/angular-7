@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import{MatButtonModule, MatCheckboxModule, MatCardModule, MatListModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule} from '@angular/material';
+import{MatButtonModule, MatCheckboxModule, MatCardModule, MatListModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatSlideToggleModule} from '@angular/material';
 import { AppComponent } from './app.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { SubmittedDirective } from './shared/submitted.directive';
@@ -11,14 +11,16 @@ import { AssignmentDetailComponent } from './assignment-detail/assignment-detail
 import { AddAssignmentComponent } from './add-assignment/add-assignment.component'
 import {  Routes, RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignment-detail/edit-assignment/edit-assignment.component'
-
+import { AuthGuard } from './shared/auth.guard'
 //routes as the variable declaration connected with Routes from @angular/router
 const routes: Routes = [
   {path:'', component: AssignmentsComponent},
   {path: 'home', component: AssignmentsComponent},
   {path: 'add', component: AddAssignmentComponent},
   {path: 'assignment/:id', component: AssignmentDetailComponent},
-  {path: 'assignment/:id/edit', component: EditAssignmentComponent}
+  {path: 'assignment/:id/edit', 
+  canActivate: [AuthGuard],
+  component: EditAssignmentComponent}
 ]
 
 @NgModule({
@@ -43,7 +45,7 @@ const routes: Routes = [
     MatCardModule,
     MatCheckboxModule,
     RouterModule.forRoot(routes),
-
+    MatSlideToggleModule
 
   ],
   providers: [AssignmentsService],

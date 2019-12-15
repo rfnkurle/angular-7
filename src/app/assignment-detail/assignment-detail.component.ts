@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Assignment } from '../assignments/assignment.model';
 import { AssignmentsService } from '../shared/assigments.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -17,6 +18,7 @@ export class AssignmentDetailComponent implements OnInit {
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
+    private authService: AuthService
     ) { }
     
   ngOnInit() {
@@ -51,6 +53,10 @@ export class AssignmentDetailComponent implements OnInit {
   onClickEdit() {
     this.router.navigate(['/assignment', this.passedAssignment.id, 'edit'],
       {queryParams: {name: this.passedAssignment.name}, fragment: 'editing'});
+  }
+
+  isAdmin(): boolean {
+    return this.authService.loggedIn
   }
 
 }
