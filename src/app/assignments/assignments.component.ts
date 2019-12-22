@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Assignment } from './assignment.model';
 import { AssignmentsService } from '../shared/assigments.service'
+import { Router } from '@angular/router'
+
 //logic file
 @Component({
   selector: 'app-assignments',
@@ -20,7 +22,8 @@ export class AssignmentsComponent implements OnInit {
   
   constructor(
     //injects an instance of the assignment service that we exported
-    private assignmentsService: AssignmentsService
+    private assignmentsService: AssignmentsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -37,7 +40,8 @@ getAssignments(){
 }//1.takes assignments from service, 2.sets it to local array 3.makes it equal to assignment service
 
 setSelected(assignment: Assignment){
-  this.selectedAssignment = assignment;
+  // this.selectedAssignment = assignment;
+  this.router.navigate(['assignment/' + assignment.id])
 }
 
 onAddBtnClick()

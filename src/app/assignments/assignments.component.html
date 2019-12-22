@@ -8,7 +8,7 @@
   </div>
 
   <mat-list *ngFor="let assignment of assignments">
-    <nav><a routerLink="/assignment/{{assignment.id}}">
+    
     <h3 mat-subheader>{{assignment.dueDate | date}}</h3>
     <mat-list-item (click)="setSelected(assignment)">
       <p matLine appSubmitted *ngIf="assignment.submitted; else unsubmitted">
@@ -20,7 +20,7 @@
 
       <mat-divider></mat-divider>
     </mat-list-item>
-    </a></nav>
+
   </mat-list>
 </main>
 

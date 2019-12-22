@@ -28,6 +28,7 @@ export class AddAssignmentComponent implements OnInit {
 
   onSubmit(){
     const assignment = new Assignment();
+    assignment.id = Math.floor(Math.random()*1000)
     assignment.name = this.name;
     assignment.dueDate = this.dueDate;
     assignment.submitted = false;
@@ -35,7 +36,8 @@ export class AddAssignmentComponent implements OnInit {
     //below no longer needed because @output was commented out
     // this.newAssignment.emit(assignment);
 
-    this.assignmentService.addAssignments(assignment);
+    this.assignmentService.addAssignments(assignment)
+    .subscribe(res=> console.log(res));
   }
 
 }

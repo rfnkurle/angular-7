@@ -12,6 +12,8 @@ import { AddAssignmentComponent } from './add-assignment/add-assignment.componen
 import {  Routes, RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignment-detail/edit-assignment/edit-assignment.component'
 import { AuthGuard } from './shared/auth.guard'
+import { HttpClientModule } from '@angular/common/http'
+
 //routes as the variable declaration connected with Routes from @angular/router
 const routes: Routes = [
   {path:'', component: AssignmentsComponent},
@@ -45,8 +47,8 @@ const routes: Routes = [
     MatCardModule,
     MatCheckboxModule,
     RouterModule.forRoot(routes),
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
+    HttpClientModule,
   ],
   providers: [AssignmentsService],
   bootstrap: [AppComponent]

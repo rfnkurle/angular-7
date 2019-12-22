@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Assignment } from '../assignments/assignment.model';
 import { Observable, of } from 'rxjs';
 import { LoggingService } from './logging.service'
-
+import { HttpClient}  from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
@@ -23,23 +23,31 @@ export class AssignmentsService {
 }
 ]
 
-
+//url to be passed into http: HttpClient service
+url = 'http://localhost:8010/api/assignments';
+urlOne = 'http://localhost:8010/api/assignment';
 
   constructor(
-   private loggingService: LoggingService
+   private loggingService: LoggingService,
+   private http: HttpClient
   ) { }
 //sets the observable as an assignemnt
   getAssignments(): Observable<Assignment[]> {
     //of package lets you return an observable
-    return of(this.assignments)
+    // return of(this.assignments)
+    
+    //specifies that we are getting an array of assignments
+    return this.http.get<Assignment[]>(this.url)
   }
   //uses id --- confusingly different from above
   getAssignment(id: number): Observable<Assignment> {
-    return of(this.assignments.find(x => x.id === id));
+    // return of(this.assignments.find(x => x.id === id));
+    return this.http.get<Assignment>(this.urlOne + '/' + id)
   }
 
-  
+  //set observable to take string - could be any
   addAssignments(assignment: Assignment): Observable<string> {
+   assignment.id = this.assignments.length + 1;
     this.assignments.push(assignment)
 
     this.loggingService.log(assignment.name, 'added');
